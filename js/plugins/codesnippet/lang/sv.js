@@ -9,5 +9,6 @@ CKEDITOR.plugins.setLang( 'codesnippet', 'sv', {
 	emptySnippetError: 'Innehåll krävs för kodsnutt',
 	language: 'Språk',
 	title: 'Kodsnutt',
+	snippetTitle: 'Title', // MISSING
 	pathName: 'kodsnutt'
 } );

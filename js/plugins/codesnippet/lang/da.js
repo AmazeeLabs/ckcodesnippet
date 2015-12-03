@@ -9,5 +9,6 @@ CKEDITOR.plugins.setLang( 'codesnippet', 'da', {
 	emptySnippetError: 'A code snippet cannot be empty.', // MISSING
 	language: 'Sprog',
 	title: 'Kodestykke',
+	snippetTitle: 'Title', // MISSING
 	pathName: 'kodestykke'
 } );

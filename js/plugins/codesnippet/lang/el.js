@@ -9,5 +9,6 @@ CKEDITOR.plugins.setLang( 'codesnippet', 'el', {
 	emptySnippetError: 'Δεν γίνεται να είναι κενά τα αποσπάσματα κώδικα.',
 	language: 'Γλώσσα',
 	title: 'Απόσπασμα κώδικα',
+	snippetTitle: 'Title', // MISSING
 	pathName: 'απόσπασμα κώδικα'
 } );

@@ -9,5 +9,6 @@ CKEDITOR.plugins.setLang( 'codesnippet', 'pt-br', {
 	emptySnippetError: 'Um fragmento de código não pode ser vazio',
 	language: 'Idioma',
 	title: 'Fragmento de código',
+	snippetTitle: 'Title', // MISSING
 	pathName: 'fragmento de código'
 } );

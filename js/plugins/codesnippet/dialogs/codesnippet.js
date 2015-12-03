@@ -57,6 +57,17 @@
 							}
 						},
 						{
+							id: 'snippet_title',
+							type: 'text',
+							label: lang.snippetTitle,
+							setup: function( widget ) {
+								this.setValue( widget.data.snippet_title );
+							},
+							commit: function( widget ) {
+								widget.setData( 'snippet_title', this.getValue() );
+							},
+						},
+						{
 							id: 'code',
 							type: 'textarea',
 							label: lang.codeContents,

@@ -9,5 +9,6 @@ CKEDITOR.plugins.setLang( 'codesnippet', 'lt', {
 	emptySnippetError: 'Kodo fragmentas negali būti tusčias.',
 	language: 'Kalba',
 	title: 'Kodo fragmentas',
+	snippetTitle: 'Title', // MISSING
 	pathName: 'kodo fragmentas'
 } );

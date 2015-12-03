@@ -9,5 +9,6 @@ CKEDITOR.plugins.setLang( 'codesnippet', 'fi', {
 	emptySnippetError: 'Koodileike ei voi olla tyhjä.',
 	language: 'Kieli',
 	title: 'Koodileike',
+	snippetTitle: 'Title', // MISSING
 	pathName: 'koodileike'
 } );

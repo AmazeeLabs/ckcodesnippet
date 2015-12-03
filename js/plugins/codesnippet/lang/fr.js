@@ -9,5 +9,6 @@ CKEDITOR.plugins.setLang( 'codesnippet', 'fr', {
 	emptySnippetError: 'Un extrait de code ne peut pas être vide.',
 	language: 'Langue',
 	title: 'Extrait de code',
+	snippetTitle: 'Title', // MISSING
 	pathName: 'extrait de code'
 } );

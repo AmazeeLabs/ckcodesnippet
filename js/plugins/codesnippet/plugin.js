@@ -287,19 +287,20 @@
 			lang = editor.lang.codesnippet;
 
 		editor.widgets.add( 'codeSnippet', {
-			allowedContent: 'pre; code(language-*)',
+			allowedContent: 'pre; code(language-*); span',
 			// Actually we need both - pre and code, but ACF does not make it possible
 			// to defire required content with "and" operator.
 			requiredContent: 'pre',
 			styleableElements: 'pre',
-			template: '<pre><code class="' + codeClass + '"></code></pre>',
+			template: '<pre><span></span><code class="' + codeClass + '"></code></pre>',
 			dialog: 'codeSnippet',
 			pathName: lang.pathName,
 			mask: true,
 
 			parts: {
+				snippet_title: 'span',
 				pre: 'pre',
-				code: 'code'
+				code: 'code',
 			},
 
 			highlight: function() {
@@ -328,7 +329,12 @@
 					oldData = this.oldData;
 
 				if ( newData.code )
-					this.parts.code.setHtml( CKEDITOR.tools.htmlEncode( newData.code ) );
+					this.parts.code.setHtml(CKEDITOR.tools.htmlEncode(newData.code));
+
+				if (!this.parts.snippet_title) {
+					this.parts.snippet_title = new CKEDITOR.dom.element( 'span' );
+				}
+				this.parts.snippet_title.setHtml(CKEDITOR.tools.htmlEncode(newData.snippet_title));
 
 				// Remove old .language-* class.
 				if ( oldData && newData.lang != oldData.lang )
@@ -346,16 +352,31 @@
 				this.oldData = CKEDITOR.tools.copy( newData );
 			},
 
-			// Upcasts <pre><code [class="language-*"]>...</code></pre>
+			// Upcasts <pre><span></span><code [class="language-*"]>...</code></pre>
 			upcast: function( el, data ) {
 				if ( el.name != 'pre' )
 					return;
 
 				var childrenArray = getNonEmptyChildren( el ),
-					code;
+					code, snippet_title;
 
-				if ( childrenArray.length != 1 || ( code = childrenArray[ 0 ] ).name != 'code' )
+				// The children array must have 1 or 2 elements, not more and
+				// not less.
+				if (childrenArray.length == 1) {
+					code = childrenArray[0];
+				} else if (childrenArray.length == 2) {
+					if (childrenArray[0].name == 'code') {
+						code = childrenArray[0];
+						snippet_title = childrenArray[1];
+					}
+					else if(childrenArray[1].name == 'code') {
+						code = childrenArray[1];
+						snippet_title = childrenArray[0];
+					}
+				}
+				if (!code || code.name != 'code') {
 					return;
+				}
 
 				// Upcast <code> with text only: http://dev.ckeditor.com/ticket/11926#comment:4
 				if ( code.children.length != 1 || code.children[ 0 ].type != CKEDITOR.NODE_TEXT )
@@ -370,15 +391,22 @@
 				// Use textarea to decode HTML entities (#11926).
 				textarea.setHtml( code.getHtml() );
 				data.code = textarea.getValue();
+				if (snippet_title) {
+					data.snippet_title = snippet_title.getHtml();
+				}
+				else {
+					data.snippet_title = '';
+				}
 
 				code.addClass( codeClass );
 
 				return el;
 			},
 
-			// Downcasts to <pre><code [class="language-*"]>...</code></pre>
+			// Downcasts to <pre><span></span><code [class="language-*"]>...</code></pre>
 			downcast: function( el ) {
 				var code = el.getFirst( 'code' );
+				var snippet_title = el.getFirst('span');
 
 				// Remove pretty formatting from <code>...</code>.
 				code.children.length = 0;
@@ -388,6 +416,10 @@
 
 				// Set raw text inside <code>...</code>.
 				code.add( new CKEDITOR.htmlParser.text( CKEDITOR.tools.htmlEncode( this.data.code ) ) );
+				if (snippet_title) {
+					snippet_title.children.length = 0;
+					snippet_title.add(new CKEDITOR.htmlParser.text(CKEDITOR.tools.htmlEncode(this.data.snippet_title)));
+				}
 
 				return el;
 			}

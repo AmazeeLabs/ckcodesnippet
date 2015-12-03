@@ -9,5 +9,6 @@ CKEDITOR.plugins.setLang( 'codesnippet', 'ku', {
 	emptySnippetError: 'تیتکی کۆد نابێت بەتاڵ بێت.',
 	language: 'زمان',
 	title: 'تیتکی کۆد',
+	snippetTitle: 'Title', // MISSING
 	pathName: 'تیتکی کۆد'
 } );

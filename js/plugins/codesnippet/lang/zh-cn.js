@@ -9,5 +9,6 @@ CKEDITOR.plugins.setLang( 'codesnippet', 'zh-cn', {
 	emptySnippetError: '插入的代码不能为空。',
 	language: '代码语言',
 	title: '代码段',
+	snippetTitle: 'Title', // MISSING
 	pathName: '代码段'
 } );

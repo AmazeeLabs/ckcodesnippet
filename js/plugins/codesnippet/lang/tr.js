@@ -9,5 +9,6 @@ CKEDITOR.plugins.setLang( 'codesnippet', 'tr', {
 	emptySnippetError: 'Kod parçacığı boş bırakılamaz',
 	language: 'Dil',
 	title: 'Kod parçacığı',
+	snippetTitle: 'Title', // MISSING
 	pathName: 'kod parçacığı'
 } );
