@@ -333,6 +333,7 @@
 
 				if (!this.parts.snippet_title) {
 					this.parts.snippet_title = new CKEDITOR.dom.element( 'span' );
+					this.parts.snippet_title.insertBefore(this.parts.code);
 				}
 				this.parts.snippet_title.setHtml(CKEDITOR.tools.htmlEncode(newData.snippet_title));
 
